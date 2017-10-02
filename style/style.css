@@ -145,7 +145,12 @@ body {
 /* External Icon */
 
 .external-icon {
+  --size: 32px;
+
   position: absolute;
   right: 1em;
   bottom: 1em;
+
+  width: var(--size);
+  height: var(--size);
 }

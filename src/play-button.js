@@ -32,8 +32,10 @@
   }
 
   PlayButton.prototype.setPaused = function (paused) {
-    paused ? this.state = playState.PAUSED : this.state = playState.PLAYING
-    this._updateView()
+    if ((paused && this.state === playState.PLAYING) || (!paused && this.state === playState.PAUSED)) {
+      paused ? this.state = playState.PAUSED : this.state = playState.PLAYING
+      this._updateView()
+    }
   }
 
   PlayButton.prototype.isPaused = function () {

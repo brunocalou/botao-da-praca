@@ -28,9 +28,9 @@
     this._rightActive = !this._rightActive
 
     if (this._rightActive) {
-      this.onClick(this.right)
+      this.onClick('right')
     } else {
-      this.onClick(this.left)
+      this.onClick('left')
     }
 
     this._updateView()
@@ -41,13 +41,17 @@
   }
 
   Switch.prototype.activateLeft = function () {
-    this._rightActive = false
-    this._updateView()
+    if (this._rightActive) {
+      this._rightActive = false
+      this._updateView()
+    }
   }
 
   Switch.prototype.activateRight = function () {
-    this._rightActive = true
-    this._updateView()
+    if (!this._rightActive) {
+      this._rightActive = true
+      this._updateView()
+    }
   }
 
   Switch.prototype.toggle = function () {

@@ -30,13 +30,13 @@ window.addEventListener('load', function () {
         audioState.play()
       }
     },
-    change () {
-      window.EventBus.emit('pause')
-      if (audioState.audio === audioState.leftAudio) {
-        audioState.audio = audioState.rightAudio
-      } else {
-        audioState.audio = audioState.leftAudio
-      }
+    change (to) {
+      var currentAudio = audioState.audio
+
+      if (to) to === 'left' ? audioState.audio = audioState.leftAudio : audioState.audio = audioState.rightAudio
+      else audioState.audio === audioState.leftAudio ? audioState.audio = audioState.rightAudio : audioState.audio = audioState.leftAudio
+
+      if (audioState.audio !== currentAudio) window.EventBus.emit('pause')
     }
   }
 

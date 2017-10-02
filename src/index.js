@@ -3,7 +3,7 @@ window.addEventListener('load', function () {
     el: document.querySelector('.switch'),
     left: 'Praça',
     right: 'Cazalbé',
-    onClick: name => { window.EventBus.emit('pause') }
+    onClick: direction => { window.EventBus.emit('change-audio-source', direction) }
   })
 
   var playButton = new window.PlayButton({
@@ -20,6 +20,11 @@ window.addEventListener('load', function () {
   window.EventBus.on('pause', _ => playButton.setPaused(true))
   window.EventBus.on('play', _ => playButton.setPaused(false))
   window.EventBus.on('toggle-playing', _ => playButton.toggle())
-  window.EventBus.on('change-audio-source', _ => playButton.setPaused(true))
-  window.EventBus.on('change-audio-source', _ => songSwitch.toggle())
+  window.EventBus.on('change-audio-source', side => {
+    if (side) {
+      side === 'left' ? songSwitch.activateLeft() : songSwitch.activateRight()
+    } else {
+      songSwitch.toggle()
+    }
+  })
 })
