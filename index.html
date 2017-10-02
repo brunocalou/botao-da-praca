@@ -32,5 +32,27 @@
   <script src="src/switch.js"></script>
   <script src="src/play-button.js"></script>
   <script src="src/index.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/UpUp/0.3.0/upup.min.js"></script>
+  <script>
+    UpUp.start({
+      'cache-version': 'v1',
+      'content-url': 'index.html',
+      'assets': [
+        'assets/audio/a-praca-e-nossa.mp3',
+        'assets/audio/cazalbe.mp3',
+        'assets/img/github-circle.svg',
+        'assets/img/pause.svg',
+        'assets/img/play.svg',
+        'style/style.css',
+        'src/event-bus.js',
+        'src/dom-events.js',
+        'src/audio.js',
+        'src/switch.js',
+        'src/play-button.js',
+        'src/index.js'
+      ],
+      'service-worker-url': '/upup.sw.min.js'
+    })
+  </script>
 </body>
 </html>
