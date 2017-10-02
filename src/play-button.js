@@ -36,5 +36,13 @@
     this._updateView()
   }
 
+  PlayButton.prototype.isPaused = function () {
+    return this.state === playState.PAUSED
+  }
+
+  PlayButton.prototype.toggle = function () {
+    this.isPaused() ? this.setPaused(false) : this.setPaused(true)
+  }
+
   context.PlayButton = PlayButton
 })(window)

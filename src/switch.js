@@ -50,5 +50,9 @@
     this._updateView()
   }
 
+  Switch.prototype.toggle = function () {
+    this.isLeftActive() ? this.activateRight() : this.activateLeft()
+  }
+
   context.Switch = Switch
 })(window)
