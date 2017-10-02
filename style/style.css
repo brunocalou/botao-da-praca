@@ -91,7 +91,7 @@ body {
 /* Play button */
 
 .play-button {
-  --size: 130px;
+  --size: 100px;
   
   position: absolute;
   left: 50%;
@@ -123,8 +123,11 @@ body {
   transition: opacity 0.3s ease-in-out;
 }
 
-.play-button:hover::after {
-  opacity: 1;  
+@media (min-width : 1025px) {
+  /* Apply hover to desktop only */
+  .play-button:hover::after {
+    opacity: 1;  
+  }
 }
 
 .play-button img {
@@ -137,4 +140,12 @@ body {
 
   width: var(--size);
   height: var(--size);
+}
+
+/* External Icon */
+
+.external-icon {
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
 }
