@@ -1,0 +1,13 @@
+{
+  "name": "Botão da Praça",
+  "short_name": "Botão da Praça",
+  "icons": [
+    {
+      "src": "assets/img/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone"
+}
