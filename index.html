@@ -7,6 +7,7 @@
   <title>Botão da Praça</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="style/style.css">
+  <link rel="manifest" href="./manifest.json">
 </head>
 <body>
 
@@ -51,7 +52,8 @@
         'src/play-button.js',
         'src/index.js'
       ],
-      'service-worker-url': '/upup.sw.min.js'
+      // 'service-worker-url': '/upup.sw.min.js' // Use locally
+      'service-worker-url': '/botao-da-praca/upup.sw.min.js' // Use on github pages
     })
   </script>
 </body>
