@@ -23,10 +23,10 @@ window.addEventListener('load', function () {
     if (Math.abs(xDiff) > Math.abs(yDiff)) {
       if (xDiff > 0) {
         // left swipe
-        window.EventBus.emit('change-audio-source', 'left')
+        window.EventBus.emit('change-audio-source', 'right')
       } else {
         // right swipe
-        window.EventBus.emit('change-audio-source', 'right')
+        window.EventBus.emit('change-audio-source', 'left')
       }
     } else {
       if (yDiff > 0) {
