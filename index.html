@@ -7,14 +7,12 @@
   <title>Botão da Praça</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="style/style.css">
+  <link rel="import" href="src/components/toggle-switch.html">
   <link rel="manifest" href="./manifest.json">
 </head>
 <body>
 
-  <div class="switch">
-    <span class="switch-option">Praça</span>
-    <span class="switch-option">Cazalbé</span>
-  </div>
+  <toggle-switch left="Praça" right="Cazalbé"></toggle-switch>
   
   <div class="play-button">
     <img src="assets/img/play.svg" alt="">
@@ -30,7 +28,6 @@
   <script src="src/event-bus.js"></script>
   <script src="src/dom-events.js"></script>
   <script src="src/audio.js"></script>
-  <script src="src/switch.js"></script>
   <script src="src/play-button.js"></script>
   <script src="src/index.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/UpUp/0.3.0/upup.min.js"></script>
@@ -48,12 +45,12 @@
         'src/event-bus.js',
         'src/dom-events.js',
         'src/audio.js',
-        'src/switch.js',
         'src/play-button.js',
-        'src/index.js'
+        'src/index.js',
+        'src/components/toggle-switch.html'
       ],
-      // 'service-worker-url': '/upup.sw.min.js' // Use locally
-      'service-worker-url': '/botao-da-praca/upup.sw.min.js' // Use on github pages
+      'service-worker-url': '/upup.sw.min.js' // Use locally
+      // 'service-worker-url': '/botao-da-praca/upup.sw.min.js' // Use on github pages
     })
   </script>
 </body>
