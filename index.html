@@ -49,8 +49,7 @@
         'src/index.js',
         'src/components/toggle-switch.html'
       ],
-      'service-worker-url': '/upup.sw.min.js' // Use locally
-      // 'service-worker-url': '/botao-da-praca/upup.sw.min.js' // Use on github pages
+      'service-worker-url': window.location.hostname.search('.github.io') !== -1 ? '/botao-da-praca/upup.sw.min.js' : '/upup.sw.min.js'
     })
   </script>
 </body>
