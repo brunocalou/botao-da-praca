@@ -1,12 +1,9 @@
 <template>
   <style>
-     :root {
-      --primary-color: #3f51b5;
-      --secondary-color: #ff4081;
-      --text-color: #fff;
-
-      --switch-height: 2.2em;
-      --switch-border-radius: calc(var(--switch-height) / 2);
+     :host {
+       --height: 2.2em;
+       --border-radius: calc(var(--height) / 2);
+       --color: red;
     }
 
     .toggle-switch {
@@ -28,7 +25,7 @@
       display: inline-flex;
       margin: auto;
 
-      height: var(--switch-height);
+      height: var(--height);
       padding-left: 1em;
       padding-right: 1em;
 
@@ -36,6 +33,7 @@
 
       align-items: center;
     }
+
     /* Switch slider */
 
     .toggle-switch::before {
@@ -44,10 +42,10 @@
       left: 0;
       top: 0;
       width: 50%;
-      height: var(--switch-height);
-      background-color: var(--secondary-color);
-      border-top-left-radius: var(--switch-border-radius);
-      border-bottom-left-radius: var(--switch-border-radius);
+      height: var(--height);
+      background-color: var(--color);
+      border-top-left-radius: var(--border-radius);
+      border-bottom-left-radius: var(--border-radius);
       z-index: -1;
       transition-duration: .2s;
       transition-timing-function: ease-in-out;
@@ -58,8 +56,8 @@
       transform: translateX(100%);
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      border-top-right-radius: var(--switch-border-radius);
-      border-bottom-right-radius: var(--switch-border-radius);
+      border-top-right-radius: var(--border-radius);
+      border-bottom-right-radius: var(--border-radius);
     }
 
     /* Switch outline */
@@ -70,9 +68,9 @@
       left: 0;
       top: 0;
       width: 100%;
-      height: var(--switch-height);
-      border: 3px solid var(--secondary-color);
-      border-radius: var(--switch-border-radius);
+      height: var(--height);
+      border: 3px solid var(--color);
+      border-radius: var(--border-radius);
       box-sizing: border-box;
     }
   </style>
@@ -92,7 +90,6 @@
 
   class ToggleSwitch extends HTMLElement {
     createdCallback () {
-      console.log('created')
       var shadow = this.createShadowRoot();
       var clone = document.importNode(template, true)
       shadow.appendChild(clone);

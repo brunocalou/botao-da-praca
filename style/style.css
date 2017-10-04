@@ -2,9 +2,6 @@
   --primary-color: #3f51b5;
   --secondary-color: #ff4081;
   --text-color: #fff;
-
-  --switch-height: 2.2em;
-  --switch-border-radius: calc(var(--switch-height) / 2);
 }
 
 html,
@@ -27,6 +24,8 @@ body {
 }
 
 toggle-switch {
+  --color: var(--secondary-color);
+
   position: absolute;
   left: 50%;
   
