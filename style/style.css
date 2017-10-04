@@ -25,6 +25,7 @@ body {
 
 toggle-switch {
   --color: var(--secondary-color);
+  --text-color: var(--text-color);
 
   position: absolute;
   left: 50%;
