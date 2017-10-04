@@ -83,88 +83,99 @@
 </template>
 
 <script>
-  var customPrototype = Object.create(HTMLElement.prototype);
-  var thisDoc = (document._currentScript || document.currentScript).ownerDocument;
-  var template = thisDoc.querySelector('template').content;
-
-  // Classes
   var RIGHT_ACTIVE_CLASS = 'right-active'
   var SWITCH_CLASS = 'toggle-switch'
   var SWITCH_OPTION_CLASS = 'toggle-switch-option'
 
-  customPrototype.createdCallback = function () {
-    var shadow = this.createShadowRoot();
-    var clone = document.importNode(template, true)
-    shadow.appendChild(clone);
+  var thisDoc = (document._currentScript || document.currentScript).ownerDocument;
+  var template = thisDoc.querySelector('template').content;
 
-    // Root
-    this.$el = shadow.querySelector('.' + SWITCH_CLASS)
+  class ToggleSwitch extends HTMLElement {
+    createdCallback () {
+      console.log('created')
+      var shadow = this.createShadowRoot();
+      var clone = document.importNode(template, true)
+      shadow.appendChild(clone);
+  
+      // Root
+      this.$el = shadow.querySelector('.' + SWITCH_CLASS)
+  
+      // State
+      this._isRightActive = false
+  
+      // Attributes
+      this._left = this.getAttribute('left') || 'Left'
+      this._right = this.getAttribute('right') || 'Right'
+  
+      // Cahe elements
+      var elements = this.$el.querySelectorAll('.' + SWITCH_OPTION_CLASS)
+      this._leftEl = elements[0]
+      this._rightEl = elements[1]
+  
+      // Handle click
+      this.$el.addEventListener('click', event => this._handleClick(event))
+  
+      // Update view
+      this._updateView()
+    }
 
-    // State
-    this._rightActive = false
+    set left (value) {
+      this._left = value
+      this._updateView()
+    }
+    
+    set right (value) {
+      this._right = value
+      this._updateView()
+    }
 
-    // Attributes
-    this.left = this.getAttribute('left') || 'Left'
-    this.right = this.getAttribute('right') || 'Right'
-
-    // Cahe elements
-    var elements = this.$el.querySelectorAll('.' + SWITCH_OPTION_CLASS)
-    this._leftEl = elements[0]
-    this._rightEl = elements[1]
-
-    // Handle click
-    this.$el.addEventListener('click', event => this._handleClick(event))
-
-    // Update view
-    this._updateView()
-  }
-
-  customPrototype.isLeftActive = function () {
-    return !this._rightActive
-  }
-
-  customPrototype.activateLeft = function () {
-    if (this._rightActive) {
-      this._rightActive = false
+    isRightActive () {
+      return this._isRightActive
+    }
+  
+    activateLeft () {
+      if (this._isRightActive) {
+        this._isRightActive = false
+        this._updateView()
+      }
+    }
+  
+    activateRight () {
+      if (!this._isRightActive) {
+        this._isRightActive = true
+        this._updateView()
+      }
+    }
+  
+    toggle () {
+      this.isRightActive() ? this.activateLeft() : this.activateRight()
+    }
+  
+    _updateView () {
+      this._isRightActive ? this.$el.classList.add(RIGHT_ACTIVE_CLASS) : this.$el.classList.remove(RIGHT_ACTIVE_CLASS)
+      this._leftEl.innerText = this._left
+      this._rightEl.innerText = this._right
+    }
+  
+    _handleClick (event) {
+      this._isRightActive = !this._isRightActive
+      this._updateView()
+    }
+  
+    // attachedCallback () {
+    //   console.log("attached Callback");
+    // }
+  
+    // detachedCallback () {
+    //   console.log("detached Callback");
+    // }
+  
+    attributeChangedCallback (attrName, oldVal, newVal) {
+      this[attrName] = newVal
       this._updateView()
     }
   }
 
-  customPrototype.activateRight = function () {
-    if (!this._rightActive) {
-      this._rightActive = true
-      this._updateView()
-    }
-  }
-
-  customPrototype.toggle = function () {
-    this.isLeftActive() ? this.activateRight() : this.activateLeft()
-  }
-
-  customPrototype._updateView = function () {
-    this._rightActive ? this.$el.classList.add(RIGHT_ACTIVE_CLASS) : this.$el.classList.remove(RIGHT_ACTIVE_CLASS)
-    this._leftEl.innerText = this.left
-    this._rightEl.innerText = this.right
-  }
-
-  customPrototype._handleClick = function (event) {
-    this._rightActive = !this._rightActive
-    this._updateView()
-  }
-
-  customPrototype.attachedCallback = function () {
-    // console.log("attached Callback");
-  }
-
-  customPrototype.detachedCallback = function () {
-    // console.log("detached Callback");
-  }
-
-  customPrototype.attributeChangedCallback = function (attrName, oldVal, newVal) {
-    this[attrName] = newVal
-    this._updateView()
-  }
-
-  document.registerElement('toggle-switch', { prototype: customPrototype });
+  document.registerElement('toggle-switch', ToggleSwitch);
 
 </script>

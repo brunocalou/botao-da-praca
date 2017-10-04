@@ -2,7 +2,7 @@ window.addEventListener('load', function () {
   var songSwitch = document.querySelector('toggle-switch')
 
   songSwitch.addEventListener('click', event => {
-    var direction = songSwitch.isLeftActive() ? 'left' : 'right'
+    var direction = songSwitch.isRightActive() ? 'right' : 'left'
     window.EventBus.emit('change-audio-source', direction)
   })
 
