@@ -1,6 +1,6 @@
 (function (context) {
-  var EventBus = (function () {
-    var events = {}
+  const EventBus = (function () {
+    const events = {}
 
     return {
       on (event, callback) {

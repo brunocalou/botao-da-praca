@@ -3,7 +3,7 @@ window.addEventListener('load', function () {
     audio.addEventListener('ended', _ => window.EventBus.emit('pause'))
   }
 
-  var audioState = {
+  const audioState = {
     playing: false,
     leftAudio: document.getElementById('audio-song'),
     rightAudio: document.getElementById('audio-laugh'),
