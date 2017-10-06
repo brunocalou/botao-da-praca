@@ -76,6 +76,7 @@
       box-sizing: border-box;
     }
   </style>
+
   <div class="toggle-switch">
     <span class="toggle-switch-option">Left</span>
     <span class="toggle-switch-option">Right</span>
@@ -83,98 +84,92 @@
 </template>
 
 <script>
-  var RIGHT_ACTIVE_CLASS = 'right-active'
-  var SWITCH_CLASS = 'toggle-switch'
-  var SWITCH_OPTION_CLASS = 'toggle-switch-option'
+  (function(document) {
+    const RIGHT_ACTIVE_CLASS = 'right-active'
+    const SWITCH_CLASS = 'toggle-switch'
+    const SWITCH_OPTION_CLASS = 'toggle-switch-option'
 
-  var thisDoc = (document._currentScript || document.currentScript).ownerDocument;
-  var template = thisDoc.querySelector('template').content;
-
-  class ToggleSwitch extends HTMLElement {
-    createdCallback () {
-      var shadow = this.createShadowRoot();
-      var clone = document.importNode(template, true)
-      shadow.appendChild(clone);
+    const thisDoc = (document._currentScript || document.currentScript).ownerDocument
+    const template = thisDoc.querySelector('template').content
   
-      // Root
-      this.$el = shadow.querySelector('.' + SWITCH_CLASS)
-  
-      // State
-      this._isRightActive = false
-  
-      // Attributes
-      this._left = this.getAttribute('left') || 'Left'
-      this._right = this.getAttribute('right') || 'Right'
-  
-      // Cahe elements
-      var elements = this.$el.querySelectorAll('.' + SWITCH_OPTION_CLASS)
-      this._leftEl = elements[0]
-      this._rightEl = elements[1]
-  
-      // Handle click
-      this.$el.addEventListener('click', event => this._handleClick(event))
-  
-      // Update view
-      this._updateView()
-    }
-
-    set left (value) {
-      this._left = value
-      this._updateView()
-    }
+    class ToggleSwitch extends HTMLElement {
+      createdCallback () {
+        const shadow = this.createShadowRoot()
+        const clone = document.importNode(template, true)
+        shadow.appendChild(clone)
     
-    set right (value) {
-      this._right = value
-      this._updateView()
-    }
-
-    isRightActive () {
-      return this._isRightActive
-    }
-  
-    activateLeft () {
-      if (this._isRightActive) {
+        // Root
+        this.$el = shadow.querySelector('.' + SWITCH_CLASS)
+    
+        // State
         this._isRightActive = false
+    
+        // Attributes
+        this._left = this.getAttribute('left') || 'Left'
+        this._right = this.getAttribute('right') || 'Right'
+    
+        // Cahed elements
+        var elements = this.$el.querySelectorAll('.' + SWITCH_OPTION_CLASS)
+        this._leftEl = elements[0]
+        this._rightEl = elements[1]
+    
+        // Handle click
+        this.$el.addEventListener('click', event => this._handleClick(event))
+    
+        // Update view
         this._updateView()
       }
-    }
   
-    activateRight () {
-      if (!this._isRightActive) {
-        this._isRightActive = true
+      set left (value) {
+        this._left = value
         this._updateView()
       }
-    }
+      
+      set right (value) {
+        this._right = value
+        this._updateView()
+      }
   
-    toggle () {
-      this.isRightActive() ? this.activateLeft() : this.activateRight()
-    }
-  
-    _updateView () {
-      this._isRightActive ? this.$el.classList.add(RIGHT_ACTIVE_CLASS) : this.$el.classList.remove(RIGHT_ACTIVE_CLASS)
-      this._leftEl.innerText = this._left
-      this._rightEl.innerText = this._right
-    }
-  
-    _handleClick (event) {
-      this._isRightActive = !this._isRightActive
-      this._updateView()
-    }
-  
-    // attachedCallback () {
-    //   console.log("attached Callback");
-    // }
-  
-    // detachedCallback () {
-    //   console.log("detached Callback");
-    // }
-  
-    attributeChangedCallback (attrName, oldVal, newVal) {
-      this[attrName] = newVal
-      this._updateView()
-    }
-  }
+      isRightActive () {
+        return this._isRightActive
+      }
+    
+      activateLeft () {
+        if (this._isRightActive) {
+          this._isRightActive = false
+          this._updateView()
+        }
+      }
+    
+      activateRight () {
+        if (!this._isRightActive) {
+          this._isRightActive = true
+          this._updateView()
+        }
+      }
+    
+      toggle () {
+        this.isRightActive() ? this.activateLeft() : this.activateRight()
+      }
+    
+      _updateView () {
+        this._isRightActive ? this.$el.classList.add(RIGHT_ACTIVE_CLASS) : this.$el.classList.remove(RIGHT_ACTIVE_CLASS)
+        this._leftEl.innerText = this._left
+        this._rightEl.innerText = this._right
+      }
+    
+      _handleClick (event) {
+        this._isRightActive = !this._isRightActive
+        this._updateView()
+      }
 
-  document.registerElement('toggle-switch', ToggleSwitch);
+      attributeChangedCallback (attrName, oldVal, newVal) {
+        this[attrName] = newVal
+        this._updateView()
+      }
+    }
+  
+    document.registerElement('toggle-switch', ToggleSwitch);
+  })(document)
 
 </script>

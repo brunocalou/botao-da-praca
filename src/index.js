@@ -1,20 +1,14 @@
 window.addEventListener('load', function () {
-  var songSwitch = document.querySelector('toggle-switch')
+  const songSwitch = document.querySelector('toggle-switch')
+  const playButton = document.querySelector('play-button')
 
   songSwitch.addEventListener('click', event => {
-    var direction = songSwitch.isRightActive() ? 'right' : 'left'
+    const direction = songSwitch.isRightActive() ? 'right' : 'left'
     window.EventBus.emit('change-audio-source', direction)
   })
 
-  var playButton = new window.PlayButton({
-    el: document.querySelector('.play-button'),
-    onClick: state => {
-      if (state === 'paused') {
-        window.EventBus.emit('pause')
-      } else {
-        window.EventBus.emit('play')
-      }
-    }
+  playButton.addEventListener('click', event => {
+    playButton.isPaused() ? window.EventBus.emit('pause') : window.EventBus.emit('play')
   })
 
   window.EventBus.on('pause', _ => playButton.setPaused(true))
