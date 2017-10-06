@@ -31,7 +31,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/UpUp/0.3.0/upup.min.js"></script>
   <script>
     UpUp.start({
-      'cache-version': 'v1',
+      'cache-version': 'v2',
       'content-url': 'index.html',
       'assets': [
         'assets/audio/a-praca-e-nossa.mp3',
@@ -44,7 +44,8 @@
         'src/dom-events.js',
         'src/audio.js',
         'src/index.js',
-        'src/components/toggle-switch.html'
+        'src/components/toggle-switch.html',
+        'src/components/play-button.html'
       ],
       'service-worker-url': window.location.hostname.search('.github.io') !== -1 ? '/botao-da-praca/upup.sw.min.js' : '/upup.sw.min.js'
     })
